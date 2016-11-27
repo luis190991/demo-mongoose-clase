@@ -1,15 +1,16 @@
 extends ../layout
-
 block content
+  div(class='alert alert-success') fdsfjhbshkfhjbfds
   h1 Lista de Usuarios
-  table
+  table(class='table table-hover')
     tr
       th Usuario
       th Nombre
       th Apellido
       th Edad
       th
-        a(href='/users/new') Nuevo
+        a(class='btn btn-success', href='/users/new')
+          i(class='fa fa-plus')
     each user in users
       tr
         td #{user.usuario}
@@ -17,3 +18,9 @@ block content
         td #{user.apellido}
         td #{user.edad}
         td
+          form(action='/users/remove', method='POST')
+            input(type='hidden', name='id', value=user.id)
+            button(type='submit', class='btn btn-danger btn-xs')
+              i(class='fa fa-trash')
+            a(class='btn btn-primary btn-xs',href='/users/edit/' + user.id)
+              i(class='fa fa-pencil')
